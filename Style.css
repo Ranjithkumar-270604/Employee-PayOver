@@ -42,6 +42,7 @@ body {
   width: 100%;
   background: #007bff;
   color: white;
+  margin: 10px 0;
   padding: 10px;
   border: none;
   border-radius: 6px;
@@ -113,19 +114,49 @@ button {
 .actions .pdf { background: #17a2b8; }
 .actions .delete { background: #dc3545; }
 
+/* Table styles */
+.table-section {
+  width: 100%;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 650px; /* Ensures table doesn't get too squeezed */
 }
 
 th, td {
   border: 1px solid #ccc;
   padding: 12px;
+  white-space: nowrap; /* Prevents text wrapping */
 }
 
 th {
   background: #007bff;
   color: #fff;
+}
+
+/* Mobile table scroll */
+@media screen and (max-width: 768px) {
+  .table-section {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin: 0 -20px; /* Negative margin to allow full-width scroll */
+    padding: 0 20px;
+  }
+  
+  .table-section::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .table-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .table-section::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
 }
 
 /* === RECORD / CHART SECTION === */
@@ -137,7 +168,6 @@ th {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 
 .record-section select {
@@ -149,14 +179,102 @@ th {
   color: #007bff;
   background-color: #fff;
   cursor: pointer;
-  max-width: 200px;
+  width: 200px;
+}
+
+.record-section canvas {
+  max-width: 400px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+@media screen and (max-width: 768px) {
+  .record-section {
+    padding: 15px;
+  }
+  
+  .record-section canvas {
+    max-width: 300px !important;
+  }
+
+  /* Table action buttons for mobile */
+  .table-section table button {
+    padding: 6px !important;
+    height: 32px !important;
+    width: 32px !important;
+    min-width: unset !important;
+    max-width: unset !important;
+    margin: 2px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .table-section table button i {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  /* Dashboard input and button consistency */
+  .app-container input,
+  .app-container select,
+  .app-container button:not(header button):not(table button) {
+    height: 45px;
+    width: 100%;
+    max-width: 300px;
+    margin: 5px auto;
+    font-size: 16px;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  /* Form grid for better alignment */
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* Form section spacing */
+  .form-section {
+    padding: 20px 15px;
+  }
+
+  /* Action buttons consistency */
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .actions button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0;
+  }
+
+  /* Preserve header button styles */
+  header button {
+    height: auto;
+    width: auto;
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .record-section canvas {
+    max-width: 250px !important;
+  }
 }
 
 canvas {
-  max-width: 100% !important;
-  height: auto !important;
+  max-width: 500px;
   margin: 0 auto;
-  display: block;
 }
 
 #summaryBar {
