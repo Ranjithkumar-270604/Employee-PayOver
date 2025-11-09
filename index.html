@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Payover Dashboard</title>
+  <link rel="stylesheet" href="./Style.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1><i class='bx bxs-bank'></i> Employee Payover</h1>
+      <button id="logoutBtn" onclick="logoutUser()"><i class='bx bx-log-out'></i> Logout</button>
+    </header>
+
+    <main>
+      <section class="form-section">
+        <h2><i class='bx bx-user-plus'></i> Add Employee</h2>
+        <div class="form-grid">
+          <input type="text" id="name" placeholder="Employee Name">
+          <select id="role">
+            <option value="Manager">Manager</option>
+            <option value="HR">HR</option>
+            <option value="Developer">Developer</option>
+            <option value="Accountant">Accountant</option>
+          </select>
+          <input type="number" id="baseSalary" placeholder="Base Salary">
+          <input type="number" id="bonus" placeholder="Bonus">
+          <input type="number" id="deductions" placeholder="Deductions">
+          <button id="addBtn"><i class='bx bx-plus-circle'></i> Add Employee</button>
+        </div>
+      </section>
+
+      <section class="table-section">
+        <table id="employeeTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Base</th>
+              <th>Bonus</th>
+              <th>Deductions</th>
+              <th>Total</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <div id="totalSalary">Total Salary Expense: ₹0</div>
+
+      <section class="record-section">
+        <h2><i class='bx bx-pie-chart-alt-2'></i> Role-wise Overview</h2>
+        <label><b>Show:</b></label>
+        <select id="chartType" onchange="updateRoleChart()">
+          <option value="count">Employee Count</option>
+          <option value="salary">Total Salary</option>
+        </select>
+        <canvas id="roleChart" width="400" height="200"></canvas>
+        <div id="summaryBar"></div>
+      </section>
+
+      <section class="actions">
+        <button onclick="downloadExcel()" class="excel"><i class='bx bx-download'></i> Excel</button>
+        <button onclick="downloadPDF()" class="pdf"><i class='bx bx-file'></i> PDF</button>
+        <button onclick="clearData()" class="delete"><i class='bx bx-trash'></i> Clear All</button>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast">Message</div>
+
+  <script src="./app.js"></script>
+  <script src="./app2.js"></script>
+</body>
+</html>
